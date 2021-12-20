@@ -33,6 +33,7 @@
 <div class="container-fluid pt-3">
     <div class="container animate-box" data-animate-effect="fadeIn">
         <div>
+
             <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">Thể thao</div>
         </div>
         <div class="owl-carousel owl-theme js" id="slider1">
@@ -48,6 +49,7 @@
                     </div>
                 </div>
             <?php endforeach; ?>
+
         </div>
     </div>
 </div>
@@ -55,6 +57,7 @@
 <div class="container-fluid pb-4 pt-5">
     <div class="container animate-box">
         <div>
+
             <div class="fh5co_heading fh5co_heading_border_bottom py-2 mb-4">Công nghệ</div>
         </div>
         <div class="owl-carousel owl-theme" id="slider2">
@@ -69,6 +72,7 @@
                     </div>
                 </div>
             <?php endforeach; ?>
+
         </div>
     </div>
 </div>
@@ -76,6 +80,7 @@
 <div class="container-fluid fh5co_video_news_bg pb-4">
     <div class="container animate-box" data-animate-effect="fadeIn">
         <div>
+
             <div class="fh5co_heading fh5co_heading_border_bottom pt-5 pb-2 mb-4  text-black">Kinh doanh</div>
         </div>
         <div>
@@ -91,6 +96,7 @@
                         </div>
                     </div>
                 <?php endforeach; ?>
+
             </div>
         </div>
     </div>

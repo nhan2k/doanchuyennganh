@@ -1,3 +1,4 @@
+
 <?php
 
 require "./Core/Database/Database.php";
