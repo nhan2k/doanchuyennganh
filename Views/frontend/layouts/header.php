@@ -33,6 +33,10 @@
                     <a href="#" class="color_fff fh5co_mediya_setting">Instagram’s big redesign goes live with black-and-white app</a>
                 </div>
                 <!-- Thêm nút login ở đây -->
+                <div class="col-2">
+                    <a href="index.php?controller=news&action=loginView" class="input-group-addon fh5co_footer_subcribe" id="basic-addon12"> <i class="fa fa-paper-plane-o"></i>&nbsp;&nbsp;Login</a>
+                </div>
+
             </div>
         </div>
     </div>
