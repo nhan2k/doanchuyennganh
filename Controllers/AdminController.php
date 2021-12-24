@@ -50,5 +50,87 @@ class AdminController extends BaseController {
         ]);
     }
 
+    // Trang danh mục
+    public function category() {
+
+        $category = $this->adminModel->getAll("category");
+
+        $this->view("backend.category.category", [
+            "category" => $category,
+            "pageName" => "Quản lý danh mục",
+        ]);
+    }
+
+    // Trang thêm danh mục
+    public function form() {
+
+        $this->view("backend.category.form", [
+            "pageName" => "thêm danh mục",
+        ]);
+    }
+
+    // Trang thêm tin tức
+    public function newsform() {
+
+        $id = $_GET["id"] ?? null;
+
+        $nameCategory = $this->adminModel->getCategoryId();
+        $nameAuthor = $this->adminModel->getAuthorId();
+
+        $this->view("backend.news.form", [
+            "nameCategory" => $nameCategory,
+            "nameAuthor" => $nameAuthor,
+            "pageName" => "thêm tin tức",
+        ]);
+    }
+
+    // Trang Sửa danh mục
+    public function editform() {
+
+        $id = $_GET["id"] ?? null;
+        $category = $this->adminModel->findCategoryById($id);
+
+        $this->view("backend.category.editform", [
+            "pageName" => "sửa danh mục",
+            "category" => $category,
+        ]);
+
+    }
+
+    // Hàm thêm danh mục
+    public function addCategory() {
+
+            $name = $_POST["name"];
+            $description = $_POST["description"];
+
+            $this->adminModel->insert("category", ["id" => "null", "name" => $name, "description" => $description]);
+
+            header("Location: index.php?controller=admin&action=category");
+    }
+
+    // Hàm sửa danh mục
+    public function updateCategory() {
+
+        $categoryId = $_GET['id'] ?? null;
+
+        $name = $_POST["name"];
+        $description = $_POST["description"];
+        $data= ["name" => $name, "description" => $description];
+
+        $this->adminModel->edit("category", $categoryId, $data);
+
+        header("Location: index.php?controller=admin&action=category");
+        exit();
+    }
+
+    // Hàm xóa danh mục
+    public function deleteCategory() {
+
+        $categoryId = $_GET['id'] ?? null;
+        $this->adminModel->destroy("category", $categoryId);
+        header("Location: index.php?controller=admin&action=category");
+        exit();
+    }
+
 
 }
