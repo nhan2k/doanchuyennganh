@@ -132,5 +132,100 @@ class AdminController extends BaseController {
         exit();
     }
 
+    // Trang tin tức
+    public function news() {
+
+        $allNews = $this->adminModel->getAllNews(50);
+
+        return $this->view("backend.news.news",[
+            "allNews" => $allNews,
+            "pageName" => "tin tức",
+        ]);
+
+    }
+
+    // Hàm thêm tin tức
+    public function addNews() {
+
+        $id = null;
+        $title = $_POST["title"];
+        $content = $_POST["content"];
+        $date_posted = $_POST["date_posted"];
+        $date_updated = $_POST["date_updated"];
+        $status = $_POST["status"];
+        $comment_status = $_POST["comment_status"];
+        $hinhanh = $_POST["hinhanh"];
+        $category_id = $_POST["category"];
+        $author_id = $_POST["author_id"];
+
+        $this->adminModel->insert("news", [
+            "id" => $id,
+            "category_id" => $category_id,
+            "date_posted" => $date_posted,
+            "title" => $title,
+            "content" => $content,
+            "date_updated" => $date_updated,
+            "status" => $status,
+            "comment_status" => $comment_status,
+            "hinhanh" => $hinhanh,
+            "author_id" => $author_id,
+        ]);
+        header("Location: index.php?controller=admin&action=news");
+        exit();
+    }
+
+    // Hàm xóa tin tức
+    public function deleteNews() {
+
+        $newsId = $_GET['id'] ?? null;
+        $this->adminModel->destroy("news", $newsId);
+        header("Location: index.php?controller=admin&action=news");
+        exit();
+    }
+
+    // Trang sửa tin tức
+    public function pageEditNews() {
+
+        $newsId = $_GET['id'] ?? null;
+
+        $news = $this->adminModel->findNews($newsId);
+
+        $this->view("backend.news.editform", [
+            "pageName" => "sửa tin tức",
+            "news" => $news,
+        ]);
+    }
+
+    // Hàm sủa tin tức
+    public function editNews() {
+
+        $id = $_GET['id'] ?? null;
+
+        $title = $_POST["title"];
+        $content = $_POST["content"];
+         $date_posted = $_POST["date_posted"];
+         $date_updated = $_POST["date_updated"];
+        $status = $_POST["status"];
+        $comment_status = $_POST["comment_status"];
+        $hinhanh = $_POST["hinhanh"];
+        $category_id = $_POST["category"];
+        $author_id = $_POST["author_id"];
+
+        $data = [
+            "category_id" => $category_id,
+             "date_posted" => $date_posted,
+            "title" => $title,
+            "content" => $content,
+             "date_updated" => $date_updated,
+            "status" => $status,
+            "comment_status" => $comment_status,
+            "hinhanh" => $hinhanh,
+            "author_id" => $author_id,
+        ];
+
+        $this->adminModel->edit("news", $id, $data);
+        header("Location: index.php?controller=admin&action=news");
+    }
+
 
 }
