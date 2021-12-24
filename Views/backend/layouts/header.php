@@ -32,7 +32,7 @@
             <div id="navMenu" class="navbar-menu">
                 <div class="navbar-start">
                     <a class="navbar-item" href="index.php?controller=news&action=index">
-                        <!-- Sign Out -->
+                        Sign Out
 
                     </a>
                 </div>
