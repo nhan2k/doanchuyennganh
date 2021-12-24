@@ -227,5 +227,96 @@ class AdminController extends BaseController {
         header("Location: index.php?controller=admin&action=news");
     }
 
+    // Quản lý tác giả
+    public function pageAuthor() {
+
+        $author = $this->adminModel->getAllAuthor(50);
+
+        $this->view("backend.author.author", [
+            "pageName" => "Quản lý tác giả",
+            "author" => $author,
+        ]);
+    }
+
+    // Trang thêm tác giả
+    public function authorForm() {
+
+        $this->view("backend.author.form", [
+            "pageName" => "Thêm Tác giả",
+        ]);
+    }
+
+    // Hàm thêm tác giả
+    public function addAuthor() {
+
+        $name = $_POST["name"];
+        $display_name = $_POST["display_name"];
+        $email = $_POST["email"];
+        $account_status = $_POST["account_status"];
+        $profile = $_POST["profile"];
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+
+        $this->adminModel->insert("author", [
+            "name" =>$name,
+            "display_name" => $display_name,
+            "email" => $email,
+            "account_status" => $account_status,
+            "profile" => $profile,
+            "username" => $username,
+            "password" => password_hash($password, PASSWORD_DEFAULT),
+        ]);
+        header("Location: index.php?controller=admin&action=pageAuthor");
+    }
+
+    // Hàm xóa tác giả
+    public function deleteAuthor() {
+
+        $author_id = $_GET['author_id'] ?? null;
+        $this->adminModel->deleteauthor($author_id);
+        header("Location: index.php?controller=admin&action=pageAuthor");
+        exit();
+    }
+
+    // Trang sửa tác giả
+    public function authorEdit() {
+
+        $author_id = $_GET['author_id'] ?? null;
+
+        $author = $this->adminModel->findAuthor($author_id);
+
+        $this->view("backend.author.editform", [
+            "pageName" => "Sửa Tác giả",
+            "author" => $author,
+        ]);
+    }
+
+    public function editAuthor() {
+
+        $table = "author";
+        $author_id = $_GET['author_id'] ?? null;
+
+        $name = $_POST["name"];
+        $display_name = $_POST["display_name"];
+        $email = $_POST["email"];
+        $account_status = $_POST["account_status"];
+        $profile = $_POST["profile"];
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+
+        $data = [
+            "name" => $name,
+            "display_name" => $display_name,
+            "email" => $email,
+            "account_status" => $account_status,
+            "profile" => $profile,
+            "username" => $username,
+            "password" => password_hash($password, PASSWORD_DEFAULT),
+        ];
+
+        $this->adminModel->authorEdit($table,$author_id ,$data);
+        header("Location: index.php?controller=admin&action=pageAuthor");
+    }
+
 
 }
