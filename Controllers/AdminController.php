@@ -318,4 +318,5 @@ class AdminController extends BaseController {
         header("Location: index.php?controller=admin&action=pageAuthor");
     }
 
+
 }
